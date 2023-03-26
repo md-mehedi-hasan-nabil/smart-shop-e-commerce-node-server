@@ -2,7 +2,11 @@ const { Schema, model } = require("mongoose");
 
 const OrderSchema = new Schema(
     {
-        products: []
+        products: [],
+        status: {
+            type: String,
+            default: "pending"
+        }
     },
     { timestamps: true }
 );

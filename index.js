@@ -7,7 +7,7 @@ const morgan = require("morgan");
 
 require("dotenv").config();
 
-const reviewRoutes = require("./routes/Review.routes");
+// const reviewRoutes = require("./routes/Review.routes");
 const productRoutes = require("./routes/Product.routes");
 const userRoutes = require("./routes/User.routes");
 const orderRoutes = require("./routes/Order.routes");
@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
   res.status(200).sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-app.use("/api/review", reviewRoutes);
+// app.use("/api/review", reviewRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/order", orderRoutes);

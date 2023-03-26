@@ -10,8 +10,11 @@ async function getOrders(req, res, next) {
     }
 }
 async function getOrder(req, res, next) {
-
+    const { orderId } = req.params || {};
+    const order = await OrderModel.findById(orderId);
+    res.status(200).json(order);
 }
+
 async function addOrder(req, res, next) {
     try {
         const { products, userId } = req.body;
@@ -26,7 +29,7 @@ async function addOrder(req, res, next) {
         user.order.push(newOrder?._id);
         await user.save();
 
-        res.status(200).json({
+        res.status(201).json({
             success: {
                 message: "Order success",
             },
@@ -37,8 +40,24 @@ async function addOrder(req, res, next) {
         next(error);
     }
 }
+
+// order edit by Status
 async function editOrder(req, res, next) {
     try {
+        const { orderId } = req.params || {};
+        const { status } = req.body
+        console.log(req.body)
+        const order = await OrderModel.findById(orderId);
+        console.log(order)
+        order.status = status
+        await order.save()
+
+        res.status(200).json({
+            order, success: {
+                message: "Order update success",
+            }
+        });
+
 
     } catch (error) {
         console.log(error);
@@ -47,6 +66,19 @@ async function editOrder(req, res, next) {
 }
 async function deleteOrder(req, res, next) {
     try {
+        const { orderId } = req.params || {};
+
+        const order = await OrderModel.findOne({ _id: orderId });
+
+        await order.deleteOne()
+
+        await OrderModel.findOneAndDelete({ _id: orderId })
+
+        res.status(204).json({
+            success: {
+                message: "Order delete success",
+            }
+        });
 
     } catch (error) {
         console.log(error);

@@ -15,7 +15,6 @@ async function getUsers(req, res, next) {
 
 async function makeAdmin(req, res, next) {
     try {
-        console.log("make admin")
         const { email } = req.params || {};
         const updateUser = await UserModel.findOneAndUpdate({ email }, {
             role: "admin"
@@ -38,7 +37,7 @@ async function makeAdmin(req, res, next) {
 async function getUserById(req, res, next) {
     try {
         const { userId } = req.params || {};
-        const user = await UserModel.findById({ _id: userId });;
+        const user = await UserModel.findById({ _id: userId });
         res.status(200).json(user);
 
     } catch (error) {
