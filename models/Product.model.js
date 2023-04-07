@@ -28,6 +28,10 @@ const productSchema = new Schema(
         },
         review: {
             type: [Object],
+        },
+        category: {
+            type: String,
+            required: true,
         }
     },
     { timestamps: true }

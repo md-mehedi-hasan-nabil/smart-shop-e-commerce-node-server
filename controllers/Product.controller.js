@@ -28,11 +28,11 @@ async function getProduct(req, res, next) {
 
 async function addProduct(req, res, next) {
   try {
-    const { productName, productImage, productDesc, price, star, country } = req.body || {};
+    const { productName, productImage, productDesc, price, star, country, category } = req.body || {};
 
     // create new book
     const newProduct = new ProductModel({
-      productName, productImage, productDesc, price, star, country
+      productName, productImage, productDesc, price, star, country, category
     });
 
     await newProduct.save();
